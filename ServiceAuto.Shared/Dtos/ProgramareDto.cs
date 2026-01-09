@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using ServiceAuto.Shared.Enums;
 
 namespace ServiceAuto.Shared.Dtos
 {
@@ -21,7 +22,7 @@ namespace ServiceAuto.Shared.Dtos
 
         public int? MecanicId { get; set; }
 
-        public string Status { get; set; } = "Programat";
+        public StatusProgramare Status { get; set; } = StatusProgramare.InAsteptare;
 
         public string NumeClient { get; set; }
 

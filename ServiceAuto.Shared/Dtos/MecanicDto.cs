@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using ServiceAuto.Shared.Enums;
 
 namespace ServiceAuto.Shared.Dtos
 {
@@ -12,10 +13,8 @@ namespace ServiceAuto.Shared.Dtos
         public string Nume { get; set; }
 
         [Required(ErrorMessage = "Specializarea este obligatorie.")]
-    
-        public string Specializare { get; set; }
+        public SpecializareMecanic Specializare { get; set; }
 
-        
         public bool EsteActiv { get; set; } = true;
     }
 }
