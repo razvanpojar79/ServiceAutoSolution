@@ -65,11 +65,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\" />
+	  <ProjectReference Include="..\ServiceAuto.Shared\ServiceAuto.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ServiceAuto.Shared\ServiceAuto.Shared.csproj" />
+	  <MauiXaml Update="Views\AppointmentsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
