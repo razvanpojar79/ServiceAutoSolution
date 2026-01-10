@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using ServiceAuto.Mobile.Views;
+using ServiceAuto.Mobile.ViewModels;
+using ServiceAuto.Mobile.Views;
+using ServiceAuto.Mobile.Services;
 
 namespace ServiceAuto.Mobile
 {
@@ -18,6 +22,11 @@ namespace ServiceAuto.Mobile
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddTransient<AppointmentsPage>();
+            builder.Services.AddTransient<AppointmentsViewModel>();
+
+            builder.Services.AddSingleton<ApiClient>();
 
             return builder.Build();
         }

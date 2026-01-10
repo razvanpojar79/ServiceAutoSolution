@@ -1,9 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using ServiceAuto.Shared.Enums;
 
 namespace ServiceAuto.Shared.AppDtos
 {
+    public enum StatusProgramare
+    {
+        InAsteptare,
+        Preluata,
+        InLucru,
+        Finalizata,
+        Anulata
+    }
+
     public class ProgramareDto
     {
         public int Id { get; set; }
@@ -11,13 +19,10 @@ namespace ServiceAuto.Shared.AppDtos
         [Required(ErrorMessage = "Data și ora sunt obligatorii.")]
         public DateTime DataOra { get; set; }
 
-        [Required(ErrorMessage = "Trebuie selectată o mașină.")]
         public int MasinaId { get; set; }
 
-        [Required(ErrorMessage = "Trebuie selectat un serviciu.")]
         public int ServiciuId { get; set; }
 
-        [Required(ErrorMessage = "Vă rugăm descrieți problema pe scurt.")]
         public string DescriereProblema { get; set; }
 
         public int? MecanicId { get; set; }
