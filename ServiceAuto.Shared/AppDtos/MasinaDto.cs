@@ -15,6 +15,8 @@ namespace ServiceAuto.Shared.AppDtos
         [Required(ErrorMessage = "Numărul de înmatriculare este obligatoriu.")]
         public string NrInmatriculare { get; set; }
 
+        public string SerieSasiu { get; set; }
+
         [Range(1950, 2100, ErrorMessage = "Anul fabricației trebuie să fie valid.")]
         public int AnFabricatie { get; set; }
 

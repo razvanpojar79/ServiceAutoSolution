@@ -2,9 +2,9 @@ using ServiceAuto.Mobile.ViewModels;
 
 namespace ServiceAuto.Mobile.Views
 {
-    public partial class AppointmentsPage : ContentPage
+    public partial class CarsPage : ContentPage
     {
-        public AppointmentsPage(AppointmentsViewModel vm)
+        public CarsPage(CarsViewModel vm)
         {
             InitializeComponent();
             BindingContext = vm;
@@ -14,7 +14,7 @@ namespace ServiceAuto.Mobile.Views
         {
             base.OnAppearing();
 
-            if (BindingContext is AppointmentsViewModel vm)
+            if (BindingContext is CarsViewModel vm)
             {
                 vm.RefreshList();
             }

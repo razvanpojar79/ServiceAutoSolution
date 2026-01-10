@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ServiceAuto.Mobile.Views.EditAppointmentPage"
+             Title="Editează Programarea"
+             BackgroundColor="#121212">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Label Text="Modifică detaliile" 
+                   FontSize="18" TextColor="White" HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Model Mașină" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding NumeMasina}" 
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Data" TextColor="#AAAAAA"/>
+                <DatePicker Date="{Binding DataSelectata}" 
+                            BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Ora" TextColor="#AAAAAA"/>
+                <TimePicker Time="{Binding OraSelectata}" 
+                            BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Descriere Problemă" TextColor="#AAAAAA"/>
+                <Editor Text="{Binding DescriereProblema}" 
+                        HeightRequest="100"
+                        BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Button Text="Salvează Modificările" 
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#512BD4" TextColor="White" 
+                    Margin="0,20,0,0" HeightRequest="50"/>
+
+            <Button Text="Anulează" 
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="Transparent" TextColor="#FF5555" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

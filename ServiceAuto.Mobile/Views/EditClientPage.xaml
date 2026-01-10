@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ServiceAuto.Mobile.Views.EditClientPage"
+             Title="Editează Client"
+             BackgroundColor="#121212">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Label Text="Modifică Datele" 
+                   FontSize="18" TextColor="White" HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Nume Complet" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Nume}" 
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Telefon" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Telefon}" 
+                       Keyboard="Telephone"
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Email" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Email}" 
+                       Keyboard="Email"
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Button Text="Salvează Modificările" 
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#512BD4" TextColor="White" 
+                    Margin="0,20,0,0" HeightRequest="50"/>
+
+            <Button Text="Anulează" 
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="Transparent" TextColor="#FF5555" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -31,6 +31,27 @@ namespace ServiceAuto.Mobile
             builder.Services.AddTransient<AddAppointmentPage>();
             builder.Services.AddTransient<AddAppointmentViewModel>();
 
+            builder.Services.AddTransient<EditAppointmentPage>();
+            builder.Services.AddTransient<EditAppointmentViewModel>();
+
+            builder.Services.AddTransient<ClientsPage>();
+            builder.Services.AddTransient<ClientsViewModel>();
+
+            builder.Services.AddTransient<AddClientPage>();
+            builder.Services.AddTransient<AddClientViewModel>();
+
+            builder.Services.AddTransient<EditClientPage>();
+            builder.Services.AddTransient<EditClientViewModel>();
+
+            builder.Services.AddTransient<CarsPage>();
+            builder.Services.AddTransient<CarsViewModel>();
+
+            builder.Services.AddTransient<AddCarPage>();
+            builder.Services.AddTransient<AddCarViewModel>();
+
+            builder.Services.AddTransient<EditCarPage>();
+            builder.Services.AddTransient<EditCarViewModel>();
+
             return builder.Build();
         }
     }
