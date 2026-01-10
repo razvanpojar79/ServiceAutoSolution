@@ -20,6 +20,13 @@
         <Tab Title="Mașini" Icon="dotnet_bot.png">
             <ShellContent ContentTemplate="{DataTemplate views:CarsPage}" />
         </Tab>
+
+        <Tab Title="Mecanici" Icon="dotnet_bot.png">
+            <ShellContent   ContentTemplate="{DataTemplate views:MecaniciPage}" />
+        </Tab>
+        <Tab Title="Servicii" Icon="dotnet_bot.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ServicesPage}" />
+        </Tab>
     </TabBar>
 
 </Shell>

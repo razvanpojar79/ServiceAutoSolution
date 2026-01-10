@@ -52,6 +52,24 @@ namespace ServiceAuto.Mobile
             builder.Services.AddTransient<EditCarPage>();
             builder.Services.AddTransient<EditCarViewModel>();
 
+            builder.Services.AddTransient<AddMecanicPage>();
+            builder.Services.AddTransient<AddMecanicViewModel>();
+
+            builder.Services.AddTransient<EditMecanicPage>();
+            builder.Services.AddTransient<EditMecanicViewModel>();
+
+            builder.Services.AddTransient<MecaniciPage>();
+            builder.Services.AddTransient<MecaniciViewModel>();
+
+            builder.Services.AddTransient<ServicesPage>();
+            builder.Services.AddTransient<ServicesViewModel>();
+
+            builder.Services.AddTransient<AddServicePage>();
+            builder.Services.AddTransient<AddServiceViewModel>();
+
+            builder.Services.AddTransient<EditServicePage>();
+            builder.Services.AddTransient<EditServiceViewModel>();
+
             return builder.Build();
         }
     }
