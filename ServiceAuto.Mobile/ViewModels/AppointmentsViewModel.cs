@@ -38,7 +38,6 @@ namespace ServiceAuto.Mobile.ViewModels
             }
             catch
             {
-                
             }
         }
     }
