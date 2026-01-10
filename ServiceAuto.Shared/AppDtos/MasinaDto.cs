@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ServiceAuto.Shared.AppDtos
 {
@@ -19,7 +18,7 @@ namespace ServiceAuto.Shared.AppDtos
         [Range(1950, 2100, ErrorMessage = "Anul fabricației trebuie să fie valid.")]
         public int AnFabricatie { get; set; }
 
-        [Required(ErrorMessage = "Trebuie selectat un client (proprietar).")]
+        [Required(ErrorMessage = "Trebuie selectat un client.")]
         public int ClientId { get; set; }
     }
 }

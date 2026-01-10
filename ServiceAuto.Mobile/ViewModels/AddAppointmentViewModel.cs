@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
-using ServiceAuto.Shared.AppDtos; 
+using ServiceAuto.Shared.AppDtos;
 using ServiceAuto.Shared;
 
 namespace ServiceAuto.Mobile.ViewModels
@@ -27,6 +27,12 @@ namespace ServiceAuto.Mobile.ViewModels
 
         private async Task SalveazaProgramare()
         {
+            if (string.IsNullOrWhiteSpace(NumeMasina) || string.IsNullOrWhiteSpace(DescriereProblema))
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Te rugăm să completezi modelul mașinii și descrierea problemei.", "OK");
+                return;
+            }
+
             var dataCompleta = new DateTime(DataSelectata.Year, DataSelectata.Month, DataSelectata.Day,
                                           OraSelectata.Hours, OraSelectata.Minutes, 0);
 
@@ -38,7 +44,6 @@ namespace ServiceAuto.Mobile.ViewModels
                 Status = StatusProgramare.Preluata
             };
 
-            
             await Shell.Current.GoToAsync("..");
         }
     }
