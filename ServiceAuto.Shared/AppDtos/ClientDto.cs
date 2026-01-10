@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceAuto.Shared.Dtos
+namespace ServiceAuto.Shared.AppDtos
 {
     public class ClientDto
     {

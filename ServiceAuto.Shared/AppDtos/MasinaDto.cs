@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceAuto.Shared.Dtos
+namespace ServiceAuto.Shared.AppDtos
 {
     public class MasinaDto
     {
