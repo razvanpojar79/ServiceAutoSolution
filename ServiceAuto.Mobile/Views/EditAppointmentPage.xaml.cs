@@ -2,9 +2,9 @@ using ServiceAuto.Mobile.ViewModels;
 
 namespace ServiceAuto.Mobile.Views
 {
-    public partial class AddAppointmentPage : ContentPage
+    public partial class EditAppointmentPage : ContentPage
     {
-        public AddAppointmentPage(AddAppointmentViewModel vm)
+        public EditAppointmentPage(EditAppointmentViewModel vm)
         {
             InitializeComponent();
             BindingContext = vm;

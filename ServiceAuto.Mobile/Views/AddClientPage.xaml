@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ServiceAuto.Mobile.Views.AddClientPage"
+             Title="Client Nou"
+             BackgroundColor="#121212">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Label Text="Datele Clientului" 
+                   FontSize="18" TextColor="White" HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Nume Complet" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Nume}" 
+                       Placeholder="Ex: Popescu Ion" 
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Telefon" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Telefon}" 
+                       Placeholder="Ex: 0744..." 
+                       Keyboard="Telephone"
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Email" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding Email}" 
+                       Placeholder="Ex: email@exemplu.com" 
+                       Keyboard="Email"
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Button Text="Salvează Clientul" 
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#512BD4" TextColor="White" 
+                    Margin="0,20,0,0" HeightRequest="50"/>
+
+            <Button Text="Anulează" 
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="Transparent" TextColor="#FF5555" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

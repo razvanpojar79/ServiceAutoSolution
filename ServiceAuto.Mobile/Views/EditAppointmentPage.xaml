@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ServiceAuto.Mobile.Views.AddAppointmentPage"
-             Title="Programare Nouă"
+             x:Class="ServiceAuto.Mobile.Views.EditAppointmentPage"
+             Title="Editează Programarea"
              BackgroundColor="#121212">
 
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20">
 
-            <Label Text="Completează detaliile" 
+            <Label Text="Modifică detaliile" 
                    FontSize="18" TextColor="White" HorizontalOptions="Center" />
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Model Mașină" TextColor="#AAAAAA"/>
                 <Entry Text="{Binding NumeMasina}" 
-                       Placeholder="Ex: VW Golf 5" 
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="Data Dorită" TextColor="#AAAAAA"/>
+                <Label Text="Data" TextColor="#AAAAAA"/>
                 <DatePicker Date="{Binding DataSelectata}" 
-                            MinimumDate="01/01/2025"
                             BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="Ora Dorită" TextColor="#AAAAAA"/>
+                <Label Text="Ora" TextColor="#AAAAAA"/>
                 <TimePicker Time="{Binding OraSelectata}" 
                             BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
@@ -34,12 +32,11 @@
             <VerticalStackLayout Spacing="5">
                 <Label Text="Descriere Problemă" TextColor="#AAAAAA"/>
                 <Editor Text="{Binding DescriereProblema}" 
-                        Placeholder="Ex: Schimb ulei..."
                         HeightRequest="100"
                         BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
-            <Button Text="Salvează Programarea" 
+            <Button Text="Salvează Modificările" 
                     Command="{Binding SaveCommand}"
                     BackgroundColor="#512BD4" TextColor="White" 
                     Margin="0,20,0,0" HeightRequest="50"/>

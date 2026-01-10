@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using ServiceAuto.Mobile.Views;
+using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.ViewModels;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Mobile.Services;
+using ServiceAuto.Shared;
 
 namespace ServiceAuto.Mobile
 {
@@ -20,13 +20,37 @@ namespace ServiceAuto.Mobile
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton(sp => new ApiClient("http://10.0.2.2:5000"));
 
             builder.Services.AddTransient<AppointmentsPage>();
             builder.Services.AddTransient<AppointmentsViewModel>();
 
-            builder.Services.AddSingleton<ApiClient>();
+            builder.Services.AddTransient<AddAppointmentPage>();
+            builder.Services.AddTransient<AddAppointmentViewModel>();
+
+            builder.Services.AddTransient<EditAppointmentPage>();
+            builder.Services.AddTransient<EditAppointmentViewModel>();
+
+            builder.Services.AddTransient<ClientsPage>();
+            builder.Services.AddTransient<ClientsViewModel>();
+
+            builder.Services.AddTransient<AddClientPage>();
+            builder.Services.AddTransient<AddClientViewModel>();
+
+            builder.Services.AddTransient<EditClientPage>();
+            builder.Services.AddTransient<EditClientViewModel>();
+
+            builder.Services.AddTransient<CarsPage>();
+            builder.Services.AddTransient<CarsViewModel>();
+
+            builder.Services.AddTransient<AddCarPage>();
+            builder.Services.AddTransient<AddCarViewModel>();
+
+            builder.Services.AddTransient<EditCarPage>();
+            builder.Services.AddTransient<EditCarViewModel>();
 
             return builder.Build();
         }
