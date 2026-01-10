@@ -1,12 +1,15 @@
 ﻿using System.Windows.Input;
+using ServiceAuto.Mobile.Services;
+using ServiceAuto.Shared;
 using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
-    public class EditClientViewModel : BindableObject, IQueryAttributable
+    public class EditClientViewModel : BindableObject
     {
-        private ClientDto _client;
+        private readonly ApiClient _apiClient;
 
+        public int Id { get; set; }
         public string Nume { get; set; }
         public string Telefon { get; set; }
         public string Email { get; set; }
@@ -14,45 +17,50 @@ namespace ServiceAuto.Mobile.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public EditClientViewModel()
+        public EditClientViewModel(ApiClient apiClient)
         {
-            SaveCommand = new Command(async () => await SalveazaModificarile());
+            _apiClient = apiClient;
+            SaveCommand = new Command(async () => await Salveaza());
             CancelCommand = new Command(async () => await Shell.Current.GoToAsync(".."));
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public void SetClient(ClientDto c)
         {
-            if (query.ContainsKey("Client"))
-            {
-                _client = query["Client"] as ClientDto;
-                IncarcaDatele();
-            }
-        }
+            Id = c.Id;
+            Nume = c.Nume;
+            Telefon = c.Telefon;
+            Email = c.Email;
 
-        private void IncarcaDatele()
-        {
-            if (_client == null) return;
-
-            Nume = _client.Nume;
-            Telefon = _client.Telefon;
-            Email = _client.Email;
-
+            OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Nume));
             OnPropertyChanged(nameof(Telefon));
             OnPropertyChanged(nameof(Email));
         }
 
-        private async Task SalveazaModificarile()
+        private async Task Salveaza()
         {
+            if (Id <= 0) return;
+
             if (string.IsNullOrWhiteSpace(Nume) || string.IsNullOrWhiteSpace(Telefon))
             {
                 await Shell.Current.DisplayAlert("Eroare", "Numele și Telefonul sunt obligatorii.", "OK");
                 return;
             }
 
-            _client.Nume = Nume;
-            _client.Telefon = Telefon;
-            _client.Email = Email;
+            var dto = new ClientDto
+            {
+                Id = Id,
+                Nume = Nume,
+                Telefon = Telefon,
+                Email = Email
+            };
+
+            var ok = await _apiClient.PutAsync($"{ApiRoutes.Clienti}/{Id}", dto);
+            if (!ok)
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Nu s-a putut salva modificarea.", "OK");
+                return;
+            }
 
             await Shell.Current.GoToAsync("..");
         }

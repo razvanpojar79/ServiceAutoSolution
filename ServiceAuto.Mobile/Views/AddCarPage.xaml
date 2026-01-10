@@ -8,49 +8,56 @@
     <ScrollView>
         <VerticalStackLayout Spacing="15" Padding="20">
 
-            <Label Text="Detalii Vehicul" 
+            <Label Text="Detalii Vehicul"
                    FontSize="18" TextColor="White" HorizontalOptions="Center" />
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Marca" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding Marca}" 
+                <Entry Text="{Binding Marca}"
                        Placeholder="Ex: Volkswagen"
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Model" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding Model}" 
+                <Entry Text="{Binding Model}"
                        Placeholder="Ex: Golf 7"
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Număr Înmatriculare" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding NrInmatriculare}" 
+                <Entry Text="{Binding NrInmatriculare}"
                        Placeholder="Ex: CJ 10 ABC"
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Serie Șasiu (VIN)" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding SerieSasiu}" 
+                <Entry Text="{Binding SerieSasiu}"
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="An Fabricație" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding AnFabricatie}" 
+                <Entry Text="{Binding AnFabricatie}"
                        Keyboard="Numeric"
                        BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
-            <Button Text="Salvează Mașina" 
+            <VerticalStackLayout Spacing="5">
+                <Label Text="ClientId" TextColor="#AAAAAA"/>
+                <Entry Text="{Binding ClientId}"
+                       Keyboard="Numeric"
+                       BackgroundColor="#333" TextColor="White"/>
+            </VerticalStackLayout>
+
+            <Button Text="Salvează Mașina"
                     Command="{Binding SaveCommand}"
-                    BackgroundColor="#512BD4" TextColor="White" 
+                    BackgroundColor="#512BD4" TextColor="White"
                     Margin="0,20,0,0" HeightRequest="50"/>
 
-            <Button Text="Anulează" 
+            <Button Text="Anulează"
                     Command="{Binding CancelCommand}"
                     BackgroundColor="Transparent" TextColor="#FF5555" />
 

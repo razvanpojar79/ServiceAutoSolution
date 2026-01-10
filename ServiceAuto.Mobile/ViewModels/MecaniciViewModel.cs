@@ -2,14 +2,15 @@
 using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared.AppDtos;
 using ServiceAuto.Shared;
+using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class MecaniciViewModel : BindableObject
     {
         private readonly ApiClient _apiClient;
+
         public ObservableCollection<MecanicDto> Mecanici { get; set; } = new ObservableCollection<MecanicDto>();
 
         public ICommand LoadMecaniciCommand { get; }
@@ -20,45 +21,24 @@ namespace ServiceAuto.Mobile.ViewModels
         public MecaniciViewModel(ApiClient apiClient)
         {
             _apiClient = apiClient;
+
             LoadMecaniciCommand = new Command(async () => await IncarcaMecanici());
             AddCommand = new Command(async () => await Shell.Current.GoToAsync(nameof(AddMecanicPage)));
             DeleteCommand = new Command<MecanicDto>(async (m) => await StergeMecanic(m));
             EditCommand = new Command<MecanicDto>(async (m) => await EditeazaMecanic(m));
 
-            AdaugaDateDeTest();
+            _ = IncarcaMecanici();
         }
 
         private async Task IncarcaMecanici()
         {
-            await Task.Delay(100);
-        }
+            var data = await _apiClient.GetAsync<MecanicDto>(ApiRoutes.Mecanici);
 
-        private void AdaugaDateDeTest()
-        {
-            Mecanici.Clear();
-
-            Mecanici.Add(new MecanicDto
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                Id = 1,
-                Nume = "Marius Stan",
-                Specializare = SpecializareMecanic.Mecanica,
-                EsteDisponibil = true
-            });
-
-            Mecanici.Add(new MecanicDto
-            {
-                Id = 2,
-                Nume = "Dan Ionescu",
-                Specializare = SpecializareMecanic.Electrica,
-                EsteDisponibil = false
-            });
-
-            Mecanici.Add(new MecanicDto
-            {
-                Id = 3,
-                Nume = "Alex Popa",
-                Specializare = SpecializareMecanic.Vopsitorie,
-                EsteDisponibil = true
+                Mecanici.Clear();
+                foreach (var m in data)
+                    Mecanici.Add(m);
             });
         }
 
@@ -82,9 +62,7 @@ namespace ServiceAuto.Mobile.ViewModels
         public void RefreshList()
         {
             for (int i = 0; i < Mecanici.Count; i++)
-            {
                 Mecanici[i] = Mecanici[i];
-            }
         }
     }
 }

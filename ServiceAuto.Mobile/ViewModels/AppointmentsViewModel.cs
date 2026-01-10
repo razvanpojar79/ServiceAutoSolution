@@ -2,14 +2,15 @@
 using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared.AppDtos;
 using ServiceAuto.Shared;
+using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class AppointmentsViewModel : BindableObject
     {
         private readonly ApiClient _apiClient;
+
         public ObservableCollection<ProgramareDto> Programari { get; set; } = new ObservableCollection<ProgramareDto>();
 
         public ICommand LoadProgramariCommand { get; }
@@ -20,48 +21,24 @@ namespace ServiceAuto.Mobile.ViewModels
         public AppointmentsViewModel(ApiClient apiClient)
         {
             _apiClient = apiClient;
+
             LoadProgramariCommand = new Command(async () => await IncarcaProgramari());
             AddCommand = new Command(async () => await Shell.Current.GoToAsync(nameof(AddAppointmentPage)));
             DeleteCommand = new Command<ProgramareDto>(async (p) => await StergeProgramare(p));
             EditCommand = new Command<ProgramareDto>(async (p) => await EditeazaProgramare(p));
 
-            AdaugaDateDeTest();
+            _ = IncarcaProgramari();
         }
 
         private async Task IncarcaProgramari()
         {
-            await Task.Delay(100);
-        }
+            var data = await _apiClient.GetAsync<ProgramareDto>(ApiRoutes.Programari);
 
-        private void AdaugaDateDeTest()
-        {
-            Programari.Clear();
-
-            Programari.Add(new ProgramareDto
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                Id = 1,
-                MasinaInfo = "TEST: Dacia Logan",
-                DenumireServiciu = "Schimb Ulei",
-                DataOra = DateTime.Now,
-                Status = StatusProgramare.InAsteptare
-            });
-
-            Programari.Add(new ProgramareDto
-            {
-                Id = 2,
-                MasinaInfo = "TEST: BMW Seria 3",
-                DenumireServiciu = "Verificare Placute",
-                DataOra = DateTime.Now.AddDays(1),
-                Status = StatusProgramare.Preluata
-            });
-
-            Programari.Add(new ProgramareDto
-            {
-                Id = 3,
-                MasinaInfo = "TEST: Audi A4",
-                DenumireServiciu = "Diagnoza",
-                DataOra = DateTime.Now.AddDays(2),
-                Status = StatusProgramare.InLucru
+                Programari.Clear();
+                foreach (var p in data)
+                    Programari.Add(p);
             });
         }
 
@@ -85,9 +62,7 @@ namespace ServiceAuto.Mobile.ViewModels
         public void RefreshList()
         {
             for (int i = 0; i < Programari.Count; i++)
-            {
                 Programari[i] = Programari[i];
-            }
         }
     }
 }

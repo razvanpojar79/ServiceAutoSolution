@@ -2,14 +2,15 @@
 using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared.AppDtos;
 using ServiceAuto.Shared;
+using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class ClientsViewModel : BindableObject
     {
         private readonly ApiClient _apiClient;
+
         public ObservableCollection<ClientDto> Clienti { get; set; } = new ObservableCollection<ClientDto>();
 
         public ICommand LoadClientiCommand { get; }
@@ -20,45 +21,24 @@ namespace ServiceAuto.Mobile.ViewModels
         public ClientsViewModel(ApiClient apiClient)
         {
             _apiClient = apiClient;
+
             LoadClientiCommand = new Command(async () => await IncarcaClienti());
             AddCommand = new Command(async () => await Shell.Current.GoToAsync(nameof(AddClientPage)));
             DeleteCommand = new Command<ClientDto>(async (c) => await StergeClient(c));
             EditCommand = new Command<ClientDto>(async (c) => await EditeazaClient(c));
 
-            AdaugaDateDeTest();
+            _ = IncarcaClienti();
         }
 
         private async Task IncarcaClienti()
         {
-            await Task.Delay(100);
-        }
+            var data = await _apiClient.GetAsync<ClientDto>(ApiRoutes.Clienti);
 
-        private void AdaugaDateDeTest()
-        {
-            Clienti.Clear();
-
-            Clienti.Add(new ClientDto
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                Id = 1,
-                Nume = "Popescu Ion",
-                Telefon = "0722123456",
-                Email = "ion.popescu@email.com"
-            });
-
-            Clienti.Add(new ClientDto
-            {
-                Id = 2,
-                Nume = "Ionescu Maria",
-                Telefon = "0744987654",
-                Email = "maria.ionescu@email.com"
-            });
-
-            Clienti.Add(new ClientDto
-            {
-                Id = 3,
-                Nume = "Georgescu Vlad",
-                Telefon = "0766112233",
-                Email = "vlad.g@email.com"
+                Clienti.Clear();
+                foreach (var c in data)
+                    Clienti.Add(c);
             });
         }
 
@@ -67,8 +47,16 @@ namespace ServiceAuto.Mobile.ViewModels
             bool confirm = await Shell.Current.DisplayAlert("Confirmare", "Sigur vrei să ștergi acest client?", "Da", "Nu");
             if (!confirm) return;
 
-            Clienti.Remove(client);
+            var ok = await _apiClient.DeleteAsync($"{ApiRoutes.Clienti}/{client.Id}");
+            if (!ok)
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Nu s-a putut șterge clientul.", "OK");
+                return;
+            }
+
+            await IncarcaClienti();
         }
+
 
         private async Task EditeazaClient(ClientDto client)
         {
@@ -82,9 +70,7 @@ namespace ServiceAuto.Mobile.ViewModels
         public void RefreshList()
         {
             for (int i = 0; i < Clienti.Count; i++)
-            {
                 Clienti[i] = Clienti[i];
-            }
         }
     }
 }

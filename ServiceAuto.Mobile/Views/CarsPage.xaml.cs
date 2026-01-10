@@ -15,9 +15,7 @@ namespace ServiceAuto.Mobile.Views
             base.OnAppearing();
 
             if (BindingContext is CarsViewModel vm)
-            {
-                vm.RefreshList();
-            }
+                vm.LoadMasiniCommand.Execute(null);
         }
     }
 }

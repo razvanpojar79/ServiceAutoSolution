@@ -16,7 +16,7 @@ namespace ServiceAuto.Mobile.Views
 
             if (BindingContext is ClientsViewModel vm)
             {
-                vm.RefreshList();
+                vm.LoadClientiCommand.Execute(null);
             }
         }
     }

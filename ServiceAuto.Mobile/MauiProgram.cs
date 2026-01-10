@@ -2,7 +2,6 @@
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.ViewModels;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared;
 
 namespace ServiceAuto.Mobile
 {
@@ -23,7 +22,8 @@ namespace ServiceAuto.Mobile
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddSingleton(sp => new ApiClient("http://10.0.2.2:5000"));
+            var apiBaseUrl = "https://spaceless-undestructively-alberto.ngrok-free.dev/";
+            builder.Services.AddSingleton(_ => new ApiClient(apiBaseUrl));
 
             builder.Services.AddTransient<AppointmentsPage>();
             builder.Services.AddTransient<AppointmentsViewModel>();
