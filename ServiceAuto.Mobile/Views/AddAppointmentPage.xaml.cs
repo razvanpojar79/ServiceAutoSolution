@@ -1,9 +1,13 @@
-namespace ServiceAuto.Mobile.Views;
+using ServiceAuto.Mobile.ViewModels;
 
-public partial class AddAppointmentPage : ContentPage
+namespace ServiceAuto.Mobile.Views
 {
-	public AddAppointmentPage()
-	{
-		InitializeComponent();
-	}
+    public partial class AddAppointmentPage : ContentPage
+    {
+        public AddAppointmentPage(AddAppointmentViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = vm;
+        }
+    }
 }
