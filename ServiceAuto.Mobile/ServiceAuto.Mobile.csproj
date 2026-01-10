@@ -64,4 +64,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Views\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ServiceAuto.Shared\ServiceAuto.Shared.csproj" />
+	</ItemGroup>
+
 </Project>

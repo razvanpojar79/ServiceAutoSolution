@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using ServiceAuto.Shared.Enums;
 
-namespace ServiceAuto.Shared.Dtos
+namespace ServiceAuto.Shared.AppDtos
 {
     public class MecanicDto
     {
