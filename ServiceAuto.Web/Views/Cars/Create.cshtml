@@ -1,0 +1,43 @@
+﻿@model ServiceAuto.Shared.AppDtos.MasinaDto
+@{
+    ViewData["Title"] = "Adaugă mașină";
+}
+
+<h2>Adaugă mașină</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Client</label>
+        <select class="form-select" asp-for="ClientId" asp-items="ViewBag.Clienti"></select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Marca</label>
+        <input class="form-control" asp-for="Marca" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input class="form-control" asp-for="Model" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">An fabricație</label>
+        <input class="form-control" asp-for="AnFabricatie" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nr. înmatriculare</label>
+        <input class="form-control" asp-for="NrInmatriculare" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Serie șasiu (VIN)</label>
+        <input class="form-control" asp-for="SerieSasiu" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Salvează</button>
+    <a class="btn btn-secondary" asp-action="Index">Înapoi</a>
+</form>

@@ -1,0 +1,44 @@
+﻿@model List<ServiceAuto.Shared.AppDtos.ServiciuDto>
+@{
+    ViewData["Title"] = "Servicii";
+}
+
+<h2>Servicii</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Adaugă serviciu</a>
+</p>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Denumire</th>
+            <th>Preț</th>
+            <th>Durată (min)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Denumire</td>
+                <td>@s.Pret</td>
+                <td>@s.DurataEstimata</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@s.Id">Editează</a>
+
+                    <form asp-action="Delete" asp-route-id="@s.Id" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Ștergi serviciul?');">
+                            Șterge
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

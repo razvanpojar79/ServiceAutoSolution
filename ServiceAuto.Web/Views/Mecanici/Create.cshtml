@@ -1,0 +1,35 @@
+﻿@model ServiceAuto.Shared.AppDtos.MecanicDto
+
+@{
+    ViewData["Title"] = "Adaugă mecanic";
+}
+
+<h2>Adaugă mecanic</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="Nume" class="form-label"></label>
+        <input asp-for="Nume" class="form-control" />
+        <span asp-validation-for="Nume" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Specializare" class="form-label"></label>
+        <select asp-for="Specializare" class="form-select"
+                asp-items="Html.GetEnumSelectList<ServiceAuto.Shared.AppDtos.SpecializareMecanic>()"></select>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="EsteDisponibil" class="form-check-input" />
+        <label asp-for="EsteDisponibil" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvează</button>
+    <a asp-action="Index" class="btn btn-secondary">Înapoi</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

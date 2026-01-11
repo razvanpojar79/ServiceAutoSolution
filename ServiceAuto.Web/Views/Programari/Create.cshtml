@@ -1,0 +1,51 @@
+﻿@model ServiceAuto.Shared.AppDtos.ProgramareDto
+
+@{
+    ViewData["Title"] = "Adaugă programare";
+}
+
+<h2>Adaugă programare</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Data și ora</label>
+        <input asp-for="DataOra" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Mașină</label>
+        <select asp-for="MasinaId"
+                class="form-select"
+                asp-items="(IEnumerable<SelectListItem>)ViewBag.Masini">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Serviciu</label>
+        <select asp-for="ServiciuId"
+                class="form-select"
+                asp-items="(IEnumerable<SelectListItem>)ViewBag.Servicii">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Mecanic</label>
+        <select asp-for="MecanicId"
+                class="form-select"
+                asp-items="(IEnumerable<SelectListItem>)ViewBag.Mecanici">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select asp-for="Status"
+                class="form-select"
+                asp-items="(IEnumerable<SelectListItem>)ViewBag.Statusuri">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvează</button>
+    <a asp-action="Index" class="btn btn-secondary">Renunță</a>
+</form>

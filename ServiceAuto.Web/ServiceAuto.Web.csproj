@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceAuto.Shared\ServiceAuto.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

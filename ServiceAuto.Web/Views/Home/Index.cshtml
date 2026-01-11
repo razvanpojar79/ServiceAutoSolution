@@ -1,8 +1,54 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <div class="card shadow-lg border-0" style="background: linear-gradient(135deg, #0d1117, #161b22);">
+                <div class="card-body text-center py-5">
+
+                    <h1 class="display-5 fw-bold text-light mb-4">
+                        ServiceAuto
+                    </h1>
+
+                    <p class="lead text-secondary mb-4">
+                        Aplicație web de management pentru service auto
+                    </p>
+
+                    <p class="text-light mb-5">
+                        Platforma permite gestionarea eficientă a clienților, mașinilor, mecanicilor,
+                        serviciilor oferite și a programărilor într-un service auto modern.
+                    </p>
+
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a asp-controller="Clients" asp-action="Index" class="btn btn-outline-light btn-lg">
+                            Clienți
+                        </a>
+                        <a asp-controller="Cars" asp-action="Index" class="btn btn-outline-light btn-lg">
+                            Mașini
+                        </a>
+                        <a asp-controller="Mecanic" asp-action="Index" class="btn btn-outline-light btn-lg">
+                            Mecanici
+                        </a>
+                        <a asp-controller="Services" asp-action="Index" class="btn btn-outline-light btn-lg">
+                            Servicii
+                        </a>
+                        <a asp-controller="Programari" asp-action="Index" class="btn btn-primary btn-lg">
+                            Programări
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-center text-secondary mt-4">
+                <small>
+                    © 2026 ServiceAuto · Proiect Medii de Programare
+                </small>
+            </div>
+
+        </div>
+    </div>
 </div>
