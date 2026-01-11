@@ -1,10 +1,13 @@
 ﻿using System.Windows.Input;
+using ServiceAuto.Mobile.Services;
+using ServiceAuto.Shared;
 using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
-    public class EditServiceViewModel : BindableObject, IQueryAttributable
+    public partial class EditServiceViewModel : BindableObject, IQueryAttributable
     {
+        private readonly ApiClient _apiClient;
         private ServiciuDto _serviciu;
 
         public string Denumire { get; set; }
@@ -14,8 +17,9 @@ namespace ServiceAuto.Mobile.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public EditServiceViewModel()
+        public EditServiceViewModel(ApiClient apiClient)
         {
+            _apiClient = apiClient;
             SaveCommand = new Command(async () => await SalveazaModificarile());
             CancelCommand = new Command(async () => await Shell.Current.GoToAsync(".."));
         }
@@ -54,7 +58,9 @@ namespace ServiceAuto.Mobile.ViewModels
             _serviciu.Pret = Pret;
             _serviciu.DurataEstimata = DurataEstimata;
 
+            await _apiClient.PutAsync($"{ApiRoutes.Servicii}/{_serviciu.Id}", _serviciu);
+
             await Shell.Current.GoToAsync("..");
         }
     }
-}   
+}

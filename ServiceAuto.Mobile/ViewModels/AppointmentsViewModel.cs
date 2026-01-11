@@ -47,7 +47,14 @@ namespace ServiceAuto.Mobile.ViewModels
             bool confirm = await Shell.Current.DisplayAlert("Confirmare", "Sigur vrei să ștergi această programare?", "Da", "Nu");
             if (!confirm) return;
 
-            Programari.Remove(programare);
+            var ok = await _apiClient.DeleteAsync($"{ApiRoutes.Programari}/{programare.Id}");
+            if (!ok)
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Nu s-a putut șterge programarea.", "OK");
+                return;
+            }
+
+            await IncarcaProgramari();
         }
 
         private async Task EditeazaProgramare(ProgramareDto programare)
@@ -61,8 +68,7 @@ namespace ServiceAuto.Mobile.ViewModels
 
         public void RefreshList()
         {
-            for (int i = 0; i < Programari.Count; i++)
-                Programari[i] = Programari[i];
+            _ = IncarcaProgramari();
         }
     }
 }

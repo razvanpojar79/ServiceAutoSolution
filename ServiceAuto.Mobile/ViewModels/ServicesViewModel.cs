@@ -2,15 +2,14 @@
 using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared;
 using ServiceAuto.Shared.AppDtos;
+using ServiceAuto.Shared;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class ServicesViewModel : BindableObject
     {
         private readonly ApiClient _apiClient;
-
         public ObservableCollection<ServiciuDto> Servicii { get; set; } = new ObservableCollection<ServiciuDto>();
 
         public ICommand LoadServiciiCommand { get; }
@@ -38,7 +37,9 @@ namespace ServiceAuto.Mobile.ViewModels
             {
                 Servicii.Clear();
                 foreach (var s in data)
+                {
                     Servicii.Add(s);
+                }
             });
         }
 
@@ -47,7 +48,14 @@ namespace ServiceAuto.Mobile.ViewModels
             bool confirm = await Shell.Current.DisplayAlert("Confirmare", "Sigur vrei să ștergi acest serviciu?", "Da", "Nu");
             if (!confirm) return;
 
-            Servicii.Remove(serviciu);
+            var ok = await _apiClient.DeleteAsync($"{ApiRoutes.Servicii}/{serviciu.Id}");
+            if (!ok)
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Nu s-a putut șterge serviciul.", "OK");
+                return;
+            }
+
+            await IncarcaServicii();
         }
 
         private async Task EditeazaServiciu(ServiciuDto serviciu)
@@ -61,8 +69,7 @@ namespace ServiceAuto.Mobile.ViewModels
 
         public void RefreshList()
         {
-            for (int i = 0; i < Servicii.Count; i++)
-                Servicii[i] = Servicii[i];
+            _ = IncarcaServicii();
         }
     }
 }

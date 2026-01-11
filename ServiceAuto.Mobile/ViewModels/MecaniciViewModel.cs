@@ -2,15 +2,14 @@
 using System.Windows.Input;
 using ServiceAuto.Mobile.Services;
 using ServiceAuto.Mobile.Views;
-using ServiceAuto.Shared;
 using ServiceAuto.Shared.AppDtos;
+using ServiceAuto.Shared;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class MecaniciViewModel : BindableObject
     {
         private readonly ApiClient _apiClient;
-
         public ObservableCollection<MecanicDto> Mecanici { get; set; } = new ObservableCollection<MecanicDto>();
 
         public ICommand LoadMecaniciCommand { get; }
@@ -38,7 +37,9 @@ namespace ServiceAuto.Mobile.ViewModels
             {
                 Mecanici.Clear();
                 foreach (var m in data)
+                {
                     Mecanici.Add(m);
+                }
             });
         }
 
@@ -47,7 +48,14 @@ namespace ServiceAuto.Mobile.ViewModels
             bool confirm = await Shell.Current.DisplayAlert("Confirmare", "Sigur vrei să ștergi acest mecanic?", "Da", "Nu");
             if (!confirm) return;
 
-            Mecanici.Remove(mecanic);
+            var ok = await _apiClient.DeleteAsync($"{ApiRoutes.Mecanici}/{mecanic.Id}");
+            if (!ok)
+            {
+                await Shell.Current.DisplayAlert("Eroare", "Nu s-a putut șterge mecanicul.", "OK");
+                return;
+            }
+
+            await IncarcaMecanici();
         }
 
         private async Task EditeazaMecanic(MecanicDto mecanic)
@@ -61,8 +69,7 @@ namespace ServiceAuto.Mobile.ViewModels
 
         public void RefreshList()
         {
-            for (int i = 0; i < Mecanici.Count; i++)
-                Mecanici[i] = Mecanici[i];
+            _ = IncarcaMecanici();
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System.Windows.Input;
+using ServiceAuto.Mobile.Services;
+using ServiceAuto.Shared;
 using ServiceAuto.Shared.AppDtos;
 
 namespace ServiceAuto.Mobile.ViewModels
 {
     public class EditMecanicViewModel : BindableObject, IQueryAttributable
     {
+        private readonly ApiClient _apiClient;
         private MecanicDto _mecanic;
 
         public string Nume { get; set; }
@@ -15,8 +18,9 @@ namespace ServiceAuto.Mobile.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public EditMecanicViewModel()
+        public EditMecanicViewModel(ApiClient apiClient)
         {
+            _apiClient = apiClient;
             ListaSpecializari = Enum.GetNames(typeof(SpecializareMecanic)).ToList();
 
             SaveCommand = new Command(async () => await SalveazaModificarile());
@@ -59,6 +63,8 @@ namespace ServiceAuto.Mobile.ViewModels
                 _mecanic.Specializare = spec;
             }
             _mecanic.EsteDisponibil = EsteDisponibil;
+
+            await _apiClient.PutAsync($"{ApiRoutes.Mecanici}/{_mecanic.Id}", _mecanic);
 
             await Shell.Current.GoToAsync("..");
         }

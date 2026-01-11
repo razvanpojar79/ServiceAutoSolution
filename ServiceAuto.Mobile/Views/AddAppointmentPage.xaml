@@ -6,35 +6,54 @@
              BackgroundColor="#121212">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20">
+        <VerticalStackLayout Spacing="15" Padding="20">
 
-            <Label Text="Completează detaliile" 
+            <Label Text="Detalii Programare" 
                    FontSize="18" TextColor="White" HorizontalOptions="Center" />
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="Model Mașină" TextColor="#AAAAAA"/>
-                <Entry Text="{Binding NumeMasina}" 
-                       Placeholder="Ex: VW Golf 5" 
-                       BackgroundColor="#333" TextColor="White"/>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Data Dorită" TextColor="#AAAAAA"/>
+                <Label Text="Data Programării" TextColor="#AAAAAA"/>
                 <DatePicker Date="{Binding DataSelectata}" 
-                            MinimumDate="01/01/2025"
                             BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="Ora Dorită" TextColor="#AAAAAA"/>
+                <Label Text="Ora" TextColor="#AAAAAA"/>
                 <TimePicker Time="{Binding OraSelectata}" 
                             BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="5">
-                <Label Text="Descriere Problemă" TextColor="#AAAAAA"/>
+                <Label Text="Selectează Mașina" TextColor="#AAAAAA"/>
+                <Picker ItemsSource="{Binding ListaMasini}"
+                        SelectedItem="{Binding MasinaSelectata}"
+                        ItemDisplayBinding="{Binding NrInmatriculare}"
+                        Title="Alege mașina"
+                        BackgroundColor="#333" TextColor="White" TitleColor="#888"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Serviciu Solicitat" TextColor="#AAAAAA"/>
+                <Picker ItemsSource="{Binding ListaServicii}"
+                        SelectedItem="{Binding ServiciuSelectat}"
+                        ItemDisplayBinding="{Binding Denumire}"
+                        Title="Alege serviciul"
+                        BackgroundColor="#333" TextColor="White" TitleColor="#888"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Mecanic Preferat (Opțional)" TextColor="#AAAAAA"/>
+                <Picker ItemsSource="{Binding ListaMecanici}"
+                        SelectedItem="{Binding MecanicSelectat}"
+                        ItemDisplayBinding="{Binding Nume}"
+                        Title="Oricare disponibil"
+                        BackgroundColor="#333" TextColor="White" TitleColor="#888"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Notă / Alte detalii" TextColor="#AAAAAA"/>
                 <Editor Text="{Binding DescriereProblema}" 
-                        Placeholder="Ex: Schimb ulei..."
+                        Placeholder="Ex: Se aude un zgomot la roata stângă..."
                         HeightRequest="100"
                         BackgroundColor="#333" TextColor="White"/>
             </VerticalStackLayout>
